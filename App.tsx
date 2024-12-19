@@ -3,6 +3,7 @@ import type { PropsWithChildren } from 'react';
 import { Text, View } from 'react-native';
 import Loader from './src/components/Loader';
 import Login from './src/screens/Auth/Login';
+import Register from './src/screens/Auth/Register';
 
 function App(): React.JSX.Element {
 
@@ -12,6 +13,7 @@ function App(): React.JSX.Element {
 
       {/* <Text>Hellow world</Text> */}
       <Login />
+      {/* <Register /> */}
     </>
   );
 }
