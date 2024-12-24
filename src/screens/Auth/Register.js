@@ -1,12 +1,30 @@
 import React, { useState } from 'react'
-import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import { Button, StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
+import DateTimePicker from '@react-native-community/datetimepicker';
 
 export default function Register() {
-     const [email, setEmail] = useState('');
-        const [password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [date, setDate] = useState(new Date());
+    const [show, setShow] = useState(false);
+    const [dobString, setDobString] = useState("");
+
+    // Function to handle date change
+    const onChange = (event, selectedDate) => {
+        const currentDate = selectedDate || date;
+        setShow(false); // Hide date picker
+        setDate(currentDate); // Update state with new date
+        setDobString(currentDate.toLocaleDateString()); // Update string format for display
+    };
+
+    // Function to display date picker when input field is clicked
+    const showDatepicker = () => {
+        setShow(true); // Show the date picker when clicked
+    };
+
 
     const handleSubmit = () => {
-        
+
         console.log('Email:', email);
         console.log('Password:', password);
     };
@@ -21,33 +39,55 @@ export default function Register() {
                     {/* Name Input */}
                     <TextInput
                         style={styles.input}
-                        placeholder="Enter your Full Name"
+                        placeholder="Full Name"
                         value={email}
-                        onChangeText={setEmail} 
-                        keyboardType="ascii-capable" 
+                        onChangeText={setEmail}
+                        keyboardType="ascii-capable"
                     />
+
+                    {/* TextInput to show the selected date */}
+                    <TextInput
+                        style={styles.input}
+                        value={dobString}
+                        placeholder="Date of Birth"
+                        // editable={false} // Prevent editing manually
+                        onFocus={showDatepicker} // Show date picker when clicked
+                        onPress={showDatepicker}
+                    />
+
+                    {/* Show DateTimePicker when needed */}
+                    {show && (
+                        <DateTimePicker
+                            value={date}
+                            mode="date"
+                            display="default"
+                            onChange={onChange}
+                        />
+                    )}
+
                     {/* Email Input */}
                     <TextInput
                         style={styles.input}
-                        placeholder="Enter your email"
+                        placeholder="Email"
                         value={email}
-                        onChangeText={setEmail} 
-                        keyboardType="email-address" 
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
                     />
 
                     {/* Password Input */}
                     <TextInput
                         style={styles.input}
-                        placeholder="Enter your password"
+                        placeholder="Password"
                         value={password}
-                        onChangeText={setPassword} 
-                        secureTextEntry={true} 
+                        onChangeText={setPassword}
+                        secureTextEntry={true}
                     />
 
                     {/* Custom Button using TouchableOpacity */}
                     <TouchableOpacity style={styles.button} onPress={handleSubmit}>
                         <Text style={styles.buttonText}>Create Account</Text>
                     </TouchableOpacity>
+
 
                 </View>
             </View>
@@ -89,7 +129,7 @@ const styles = StyleSheet.create({
     },
     button: {
         marginTop: 10,
-        backgroundColor: '#ac1e5f', 
+        backgroundColor: '#ac1e5f',
         paddingVertical: 10,
         paddingHorizontal: 30,
         borderRadius: 25,
@@ -99,6 +139,22 @@ const styles = StyleSheet.create({
     buttonText: {
         color: '#fff',
         fontSize: 14,
+    },
+    text1: {
+        fontSize: 20,
+        marginBottom: 20,
+    },
+    dateText: {
+        fontSize: 18,
+        marginBottom: 20,
+    },
+    input1: {
+        height: 40,
+        borderColor: 'gray',
+        borderWidth: 1,
+        width: '80%',
+        paddingLeft: 10,
+        borderRadius: 5,
     },
 })
 
