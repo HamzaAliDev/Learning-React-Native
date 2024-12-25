@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import { StyleSheet, Text, TextInput, TouchableOpacity, View } from 'react-native'
 
-export default function Login() {
+export default function Login({ navigation }) {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
@@ -22,8 +22,8 @@ export default function Login() {
                         style={styles.input}
                         placeholder="Enter your email"
                         value={email}
-                        onChangeText={setEmail} 
-                        keyboardType="email-address" 
+                        onChangeText={setEmail}
+                        keyboardType="email-address"
                     />
 
                     {/* Password Input */}
@@ -31,7 +31,7 @@ export default function Login() {
                         style={styles.input}
                         placeholder="Enter your password"
                         value={password}
-                        onChangeText={setPassword} 
+                        onChangeText={setPassword}
                         secureTextEntry={true}
                     />
 
@@ -42,7 +42,7 @@ export default function Login() {
 
                 </View>
                 <View>
-                    <TouchableOpacity style={styles.createButton} onPress={handleSubmit}>
+                    <TouchableOpacity style={styles.createButton} onPress={() => { navigation.navigate("Register") }}>
                         <Text style={styles.buttonText}>Create account</Text>
                     </TouchableOpacity>
                 </View>
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         paddingHorizontal: 30,
         paddingVertical: 40,
         borderRadius: 15,
-        
+
 
     },
     input: {
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
         color: '#fff', // Button text color
         fontSize: 14,
     },
-    createButton:{
+    createButton: {
         marginTop: 10,
         backgroundColor: '#ac1e5f', // Set background color here
         paddingVertical: 10,

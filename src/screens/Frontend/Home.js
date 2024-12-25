@@ -61,7 +61,7 @@ const data = [
 ];
 
 
-export default function Home() {
+export default function Home({ navigation }) {
     const renderPost = ({ item }) => (
         <View style={styles.postContainer}>
             <View style={styles.header}>
@@ -102,7 +102,7 @@ export default function Home() {
                 ListHeaderComponent={
                     <View style={styles.headerMain}>
                         <Text style={styles.headerHeading}>Postify</Text>
-                        <View><Ionicons name={'chatbubble-ellipses-outline'} size={25} color={"black"} /></View>
+                        <View><Ionicons name={'chatbubble-ellipses-outline'} size={25} color={"black"} onPress={()=> {navigation.navigate("Chat")}} /></View>
                     </View>
                 }
             />
